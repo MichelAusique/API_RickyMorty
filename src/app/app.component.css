@@ -1,0 +1,15 @@
+.form-control,
+.form-select,
+.btn {
+  border-radius: 12px;
+}
+
+.btn-success {
+  background-color: #1aa37a;
+  border-color: #1aa37a;
+}
+
+.btn-success:hover {
+  background-color: #158a66;
+  border-color: #158a66;
+}

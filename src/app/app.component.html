@@ -1,0 +1,63 @@
+<div class="container py-4">
+  <div class="d-flex flex-column flex-md-row gap-3 align-items-md-end mb-4">
+    <div class="flex-grow-1">
+      <h1 class="rm-title fw-bold mb-1">Rick and Morty</h1>
+      <p class="text-muted mb-0">Explora personajes y filtra por nombre o estado.</p>
+    </div>
+    <span class="badge rm-badge px-3 py-2">API Pública</span>
+  </div>
+
+  <form class="row g-3 align-items-end" (ngSubmit)="onSearch()">
+    <div class="col-12 col-md-6">
+      <label for="nameFilter" class="form-label">Buscar por nombre</label>
+      <input
+        id="nameFilter"
+        type="text"
+        class="form-control"
+        placeholder="Rick, Morty, Summer..."
+        [(ngModel)]="nameFilter"
+        name="nameFilter"
+      />
+    </div>
+    <div class="col-12 col-md-3">
+      <label for="statusFilter" class="form-label">Estado</label>
+      <select
+        id="statusFilter"
+        class="form-select"
+        [(ngModel)]="statusFilter"
+        name="statusFilter"
+        (change)="onStatusChange()"
+      >
+        <option value="">Todos</option>
+        <option value="alive">Alive</option>
+        <option value="dead">Dead</option>
+        <option value="unknown">Unknown</option>
+      </select>
+    </div>
+    <div class="col-12 col-md-3 d-grid">
+      <button class="btn btn-success" type="submit">Buscar</button>
+    </div>
+  </form>
+
+  <div class="mt-4" *ngIf="loading">Cargando...</div>
+  <div class="mt-4 text-danger" *ngIf="!loading && errorMessage">{{ errorMessage }}</div>
+
+  <div class="row g-4 mt-1" *ngIf="!loading">
+    <div class="col-12 col-sm-6 col-lg-4" *ngFor="let character of characters">
+      <div class="rm-card h-100">
+        <img [src]="character.image" [alt]="character.name" class="w-100 rm-img" />
+        <div class="p-3">
+          <h5 class="fw-bold mb-2">{{ character.name }}</h5>
+          <p class="mb-1">
+            <span class="fw-semibold">Estado:</span>
+            {{ character.status }}
+          </p>
+          <p class="mb-0">
+            <span class="fw-semibold">Especie:</span>
+            {{ character.species }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
